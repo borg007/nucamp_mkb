@@ -42,8 +42,10 @@ footer {
 .reserveButton {
     margin-top: 0;
 }
+/* this is no longer needed because of the accordion
 .tab-content {
     border: 1px solid #DDD;
     border-top: none;
     padding: 10px;
 }
+*/
