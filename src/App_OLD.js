@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
+import './App.css';
+import Directory from './components/DirectoryComponent';
+import { CAMPSITES } from './shared/campsites';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class Directory extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedCampsite: null
+            selectedCampsite: null,
+            campsites: CAMPSITES
         };
     }
-
-    onCampsiteSelect(campsite) {
+    onCampsiteSelect(campsite){
         this.setState({selectedCampsite: campsite});
     }
-
     renderSelectedCampsite(campsite) {
-        if (campsite) {
+        if (campsite){
             return (
                 <Card>
-                    <CardImg top src={campsite.image} alt={campsite.name} />
+                    <CardImg top src={campsite.image} alt={campsite.name}/>
                     <CardBody>
                         <CardTitle>{campsite.name}</CardTitle>
                         <CardText>{campsite.description}</CardText>
@@ -25,17 +27,18 @@ class Directory extends Component {
                 </Card>
             );
         }
-        return <div />;
+        return <div/>;
     }
-
+    
     render() {
-        const directory = this.props.campsites.map(campsite => {
+        const directory = this.state.campsites.map(campsite => {
             return (
-                <div key={campsite.id} className="col-md-5 m-1">
+                <div key={campsite.id} className="col-md m-1">
                     <Card onClick={() => this.onCampsiteSelect(campsite)}>
                         <CardImg width="100%" src={campsite.image} alt={campsite.name} />
                         <CardImgOverlay>
                             <CardTitle>{campsite.name}</CardTitle>
+                            <p>{campsite.description}</p>
                         </CardImgOverlay>
                     </Card>
                 </div>
@@ -56,5 +59,5 @@ class Directory extends Component {
         );
     }
 }
-
 export default Directory;
+// export default App;
